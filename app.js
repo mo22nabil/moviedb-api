@@ -8,9 +8,11 @@ const saltRounds = 7
 
 app.use(express.json())
 const userSchema = mongoose.Schema({
-    name: String,
+    first_name: String,
+    last_name: String,
     email: { type: String, unique: true },
-    password: String
+    password: String,
+    age: Number,
 }, { timestamps: true })
 const userModel = mongoose.model('user', userSchema)
 
@@ -20,13 +22,13 @@ app.get('*', (req, res) => res.send('Hello World!'))
 
 app.post('/signUp', async (req, res) => {
     try {
-        const { name, email, password } = req.body
+        const { first_name, last_name, age, email, password } = req.body
         let user = await userModel.findOne({ email })
         if (user) {
             res.json({ message: "email already exsit" })
         } else {
             bcrypt.hash(password, saltRounds, async function (err, hash) {
-                await userModel.insertMany({ name, email, password: hash })
+                await userModel.insertMany({ first_name, last_name, age, email, password: hash })
                 res.json({ message: "success" })
             });
         }
