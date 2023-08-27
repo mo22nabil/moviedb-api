@@ -55,10 +55,13 @@ app.post('/logIn', async (req, res) => {
     }
 });
 
-mongoose.connect('mongodb://localhost:27017/moviesProject').then(() => {
+mongoose.connect('mongodb+srv://route:route1234@cluster0.7gl5emz.mongodb.net/moviesProject').then(() => {
     console.log("db connected");
 }).catch((err) => {
     console.log(err);
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
+/* mongodb+srv://route:route1234@cluster0.7gl5emz.mongodb.net/moviesProject */
+/* 'mongodb://localhost:27017/moviesProject' */
