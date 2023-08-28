@@ -3,10 +3,16 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { default: mongoose } = require('mongoose')
 const app = express()
-const port = 3000
+const port = 8080
 const saltRounds = 7
 
 app.use(express.json())
+
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+  });
 const userSchema = mongoose.Schema({
     first_name: String,
     last_name: String,
